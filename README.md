@@ -45,11 +45,11 @@ Will conform to the values in lib/dbconfig.js
 
 `storage` is for sqlite defaults to `credit.db`
 
-`host` is host
-`database` is database name
-`username` is username
-`password` is password
-`wallet` is the wallet that contains the webcredit ledger, api and details
+* `host` is host
+* `database` is database name
+* `username` is username
+* `password` is password
+* `wallet` is the wallet that contains the webcredit ledger, api and details
 
 Are supported
 
