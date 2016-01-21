@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+
+// requires
 var WebSocket = require('ws');
 var exec      = require('child_process').exec;
 var $rdf      = require('rdflib');
@@ -353,3 +356,5 @@ function listen() {
 
 
 }
+
+module.exports = run;
