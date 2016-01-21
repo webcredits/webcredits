@@ -10,6 +10,14 @@ web.
 
     npm install -g webcredits
 
+# Setup
+
+    credit create
+    credit genesis
+
+After the tables are in place, the genesis process must be carried out.  The standard population script will put 1 million bits in the coinbase which can then be distributed in tranches to the seed users or robots.
+
+
 # Commands
 
     balance <URI>                - shows a balance
@@ -22,10 +30,6 @@ web.
     server                       - starts an express server
     websocket                    - starts a websocket server
 
-# Setup
-
-    credit create
-    credit genesis
 
 Will conform to the values in lib/dbconfig.js
 
@@ -148,12 +152,6 @@ CREATE TABLE Genesis (
 The default currency is the 'bit' equal to one millionth of a bitcoin.
 
 # Controller
-
-## Setup
-
-The first step is to setup the database structure in a file (sqlite) or in a mysql database.
-
-After the tables are in place, the genesis process must be carried out.  The standard population script will put 1 million bits in the coinbase which can then be distributed in tranches to the seed users or robots.
 
 ## Reading
 
