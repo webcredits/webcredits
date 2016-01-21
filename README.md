@@ -19,7 +19,7 @@ After the tables are in place, the genesis process must be carried out.  The sta
 
     credit server
 
-Then go to http://localhost:11077/ for the web interface.  Alternatively calls can be places via the library or command line.
+Then go to http://localhost:11077/ for the web interface.  Alternatively calls can be placed via the library or command line.
 
 # Commands
 
@@ -63,7 +63,7 @@ Will conform to the values in lib/dbconfig.js
 
 Are supported
 
-# Introduction
+# More Detailed Explanation
 
 Webcredits is a transferable points scoring system.  It can be used to provide feedback to the user, throttle actions and allow "gamification" of apps.  The system is secure and compatible with the work of the W3C payments groups, so that real incentives may be eventually used.  The first versions of the system will only use test credits of negligible monetary value.  However, the same code can be used for production systems using full payments.
 
