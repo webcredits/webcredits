@@ -26,6 +26,33 @@ webcredits
 
 Will conform to the values in lib/dbconfig.js
 
+# Configuration
+
+    config.dialect  = 'mysql';
+    config.storage  = 'credit.db';
+    config.host     = 'localhost';
+    config.database = 'webcredits';
+    config.username = 'root';
+    config.password = '';
+    config.wallet   = 'https://localhost/wallet/inartes#this';
+
+`dialect` is the db type
+* mysql
+* sqlite
+* mssql
+* mariadb
+* postgres
+
+`storage` is for sqlite defaults to `credit.db`
+
+`host` is host
+`database` is database name
+`username` is username
+`password` is password
+`wallet` is the wallet that contains the webcredit ledger, api and details
+
+Are supported
+
 # Introduction
 
 Webcredits is a transferable points scoring system.  It can be used to provide feedback to the user, throttle actions and allow "gamification" of apps.  The system is secure and compatible with the work of the W3C payments groups, so that real incentives may be eventually used.  The first versions of the system will only use test credits of negligible monetary value.  However, the same code can be used for production systems using full payments.
