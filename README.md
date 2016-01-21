@@ -3,6 +3,9 @@
 webcredits
 ==========
 
+Webcredits is a library for creating decentralized ledgers and payments on the
+web.
+
 # Installation
 
     npm install -g webcredits
