@@ -34,7 +34,7 @@ Will conform to the values in lib/dbconfig.js
     config.database = 'webcredits';
     config.username = 'root';
     config.password = '';
-    config.wallet   = 'https://localhost/wallet/inartes#this';
+    config.wallet   = 'https://localhost/wallet/test#this';
 
 `dialect` is the db type
 * mysql

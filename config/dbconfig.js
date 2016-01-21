@@ -7,6 +7,6 @@ config.host     = 'localhost';
 config.database = 'webcredits';
 config.username = 'root';
 config.password = '';
-config.wallet   = 'https://localhost/wallet/inartes#this';
+config.wallet   = 'https://localhost/wallet/test#this';
 
 module.exports = config;
