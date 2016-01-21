@@ -17,7 +17,7 @@ web.
 
 After the tables are in place, the genesis process must be carried out.  The standard population script will put 1 million bits in the coinbase which can then be distributed in tranches to the seed users or robots.
 
-   credit server
+    credit server
 
 Then go to http://localhost:11077/ for the web interface.  Alternatively calls can be places via the library or command line.
 
