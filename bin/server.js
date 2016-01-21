@@ -249,4 +249,4 @@ if (require.main === module) {
   bin(process.argv);
 }
 
-module.exports = server;
+module.exports = bin;
