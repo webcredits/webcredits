@@ -21,12 +21,12 @@ After the tables are in place, the genesis process must be carried out.  The sta
 
 Then go to
 
-* http://localhost:11077/
-* http://localhost:11077/ledger
-* http://localhost:11077/balance
-* http://localhost:11077/reputation
-* http://localhost:11077/tx
-* http://localhost:11077/insert
+* <http://localhost:11077/>
+* <http://localhost:11077/ledger>
+* <http://localhost:11077/balance>
+* <http://localhost:11077/reputation>
+* <http://localhost:11077/tx>
+* <http://localhost:11077/insert>
 
 Alternatively calls can be placed via the library or command line.
 
