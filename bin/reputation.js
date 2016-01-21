@@ -26,3 +26,5 @@ function bin(argv) {
 if (require.main === module) {
   bin(process.argv);
 }
+
+module.exports = bin;
