@@ -2,6 +2,7 @@
 
 // requires
 var webcredits = require('../lib/webcredits.js');
+var program    = require('commander');
 
 
 /**
@@ -42,8 +43,19 @@ function bin(argv) {
     process.exit(-1);
   }
 
-  var sequelize = webcredits.createDB(config);
-  webcreditsinsert(credit, sequelize, config);
+  program
+  .option('-d, --database <database>', 'Database')
+  .option('-w, --wallet <wallet>', 'Wallet')
+  .parse(argv);
+
+  var defaultDatabase = 'webcredits';
+  var defaultWallet   = 'https://localhost/wallet/test#this';
+
+  config.database = program.database || config.database || defaultDatabase;
+  config.wallet   = program.wallet   || config.wallet   || defaultWallet;
+
+  var sequelize = webcredits.setupDB(config);
+  webcredits.insert(credit, sequelize, config);
 
 }
 
