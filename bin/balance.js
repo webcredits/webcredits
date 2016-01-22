@@ -20,12 +20,15 @@ function bin(argv) {
   }
 
   program
-  .option('-d, --database <database>', 'Port')
+  .option('-d, --database <database>', 'Database')
+  .option('-w, --wallet <wallet>', 'Wallet')
   .parse(argv);
 
   var defaultDatabase = 'webcredits';
+  var defaultWallet   = 'https://localhost/wallet/test#this';
 
   config.database = program.database || config.database || defaultDatabase;
+  config.wallet   = program.wallet   || config.wallet   || defaultWallet;
 
   webcredits.balance(source, config);
 
