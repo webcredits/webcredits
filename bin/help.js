@@ -14,7 +14,7 @@ function help(argv, callback) {
   ret += '  insert <source> <amount> <unit> <destination> \n';
   ret += '     [description] [timestamp] - inserts a web credit\n';
   ret += '  reputation <URI>             - gets the reputation\n';
-  ret += '  server                       - starts an express server\n';
+  ret += '  server [-p <port>]           - starts an express server on port p\n';
   ret += '  websocket                    - starts a websocket server\n';
   callback(null, ret);
 }

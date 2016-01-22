@@ -2,7 +2,8 @@
 
 // requires
 var Sequelize = require('sequelize');
-var express = require('express');
+var express   = require('express');
+var program   = require('commander');
 
 var app = express();
 
@@ -48,7 +49,7 @@ function setupDB(config) {
 * start server
 * @param  {Object} sequelize db object
 */
-function startServer(sequelize, config) {
+function startServer(sequelize, config, port) {
 
   app.get('/', function (req, res) {
     var ret = '';
@@ -211,7 +212,10 @@ function startServer(sequelize, config) {
 
   });
 
-  var server = app.listen(11077, function () {
+  var defaultPort = 11077;
+  port = port || defaultPort;
+
+  var server = app.listen(port, function () {
     var host = server.address().address;
     var port = server.address().port;
 
@@ -224,13 +228,13 @@ function startServer(sequelize, config) {
 * server function
 * @param  {Object} config [description]
 */
-function server(config) {
+function server(config, port) {
   // vars
   var sequelize;
 
   // run main
   sequelize = setupDB(config);
-  startServer(sequelize, config);
+  startServer(sequelize, config, port);
 }
 
 
@@ -241,7 +245,13 @@ function bin(argv) {
   // setup config
   var config = require('./dbconfig.js');
 
-  server(config);
+  program
+  .option('-p, --port <n>', 'Port', parseInt)
+  .parse(argv);
+
+  var port = program.port;
+
+  server(config, port);
 }
 
 // If one import this file, this is a module, otherwise a library
