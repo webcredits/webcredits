@@ -2,6 +2,7 @@
 
 // requires
 var webcredits = require('../lib/webcredits.js');
+var program    = require('commander');
 
 
 /**
@@ -17,6 +18,14 @@ function bin(argv) {
     console.error('Source is required');
     process.exit(-1);
   }
+
+  program
+  .option('-d, --database <database>', 'Port')
+  .parse(argv);
+
+  var defaultDatabase = 'webcredits';
+
+  config.database = program.database || config.database || defaultDatabase;
 
   webcredits.balance(source, config);
 

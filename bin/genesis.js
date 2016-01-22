@@ -2,6 +2,7 @@
 
 // requires
 var webcredits = require('../lib/webcredits.js');
+var program    = require('commander');
 
 
 /**
@@ -11,7 +12,19 @@ function bin(argv) {
   // setup config
   var config = require('./dbconfig.js');
 
+  program
+  .option('-d, --database <database>', 'Database')
+  .option('-w, --wallet <wallet>', 'Wallet')
+  .parse(argv);
+
+  var defaultDatabase = 'webcredits';
+  var defaultWallet   = 'https://localhost/wallet/test#this';
+
+  config.database = program.database || config.database || defaultDatabase;
+  config.wallet   = program.wallet   || config.wallet   || defaultWallet;
+
   webcredits.genesis(config);
+
 }
 
 // If one import this file, this is a module, otherwise a library

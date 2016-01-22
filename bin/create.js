@@ -18,8 +18,6 @@ function bin(argv) {
 
   var defaultDatabase = 'webcredits';
 
-  var database = program.database || defaultDatabase;
-
   config.database = program.database || config.database || defaultDatabase;
 
   webcredits.createDB(config);
