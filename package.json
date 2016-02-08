@@ -1,8 +1,8 @@
 {
   "name": "webcredits",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "description": "webcredits",
-  "main": "index.js",
+  "main": "lib/webcredits.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha ./test/*.js"
   },
