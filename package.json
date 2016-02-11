@@ -1,6 +1,6 @@
 {
   "name": "webcredits",
-  "version": "0.0.38",
+  "version": "0.0.39",
   "description": "webcredits",
   "main": "lib/webcredits.js",
   "scripts": {
@@ -24,6 +24,7 @@
     "debug": "^2.2.0",
     "express": "^4.13.4",
     "jsonld": "^0.4.4",
+    "mkdirp": "^0.5.1",
     "mysql": "^2.10.2",
     "sequelize": "^3.17.1",
     "sha256": "^0.2.0",

@@ -20,7 +20,13 @@ function bin(argv) {
 
   config.database = program.database || config.database || defaultDatabase;
 
-  webcredits.createDB(config);
+  webcredits.createDB(config, function(err, ret) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(ret);
+    }
+  });
 }
 
 // If one import this file, this is a module, otherwise a library
