@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 // requires
-var webcredits = require('../lib/webcredits.js');
-var program    = require('commander');
+var wc      = require('../lib/webcredits.js');
+var program = require('commander');
 
 
 /**
@@ -23,7 +23,13 @@ function bin(argv) {
   config.database = program.database || config.database || defaultDatabase;
   config.wallet   = program.wallet   || config.wallet   || defaultWallet;
 
-  webcredits.genesis(config);
+  wc.genesis(config, function(err, ret) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(ret);
+    }
+  });
 
 }
 
