@@ -145,6 +145,7 @@ function startServer(sequelize, config, port) {
 
          */
         res.setHeader('Content-Type', 'text/turtle');
+
         for (var i = 0; i < bal[0].length; i++) {
           if (i===max) {
             break;
@@ -208,6 +209,65 @@ function startServer(sequelize, config, port) {
   });
 
   app.get('/insert', function (req, res) {
+
+    var defaultCurrency = 'https://w3id.org/cc#bit';
+
+    var source      = req.query.source;
+    var destination = req.query.destination;
+    var currency    = req.query.currency || defaultCurrency;
+    var amount      = req.query.amount;
+    var created     = null;
+    var description = req.query.description;
+
+
+    if (!source) {
+      res.send('source required');
+      return;
+    }
+
+    if (!destination) {
+      res.send('destination required');
+      return;
+    }
+
+    if (!currency) {
+      res.send('currency required');
+      return;
+    }
+
+    if (!amount) {
+      res.send('amount required');
+      return;
+    }
+
+    var credit = {};
+
+    credit["https://w3id.org/cc#source"] = source;
+    credit["https://w3id.org/cc#amount"] = amount;
+    credit["https://w3id.org/cc#currency"] = currency;
+    credit["https://w3id.org/cc#destination"] = destination;
+
+    credit["http://purl.org/dc/terms/description"] = description || null;
+    credit["http://purl.org/dc/terms/created"] = created || null;
+
+
+    wc.insert(credit, sequelize, config, function(err, ret) {
+      if (err) {
+        res.send(err);
+        return;
+      } else {
+        res.send(ret);
+      }
+
+    });
+
+
+  });
+
+  app.get('/inbox', function (req, res) {
+
+    var origin = req.headers.origin;
+    res.setHeader('Access-Control-Allow-Origin', origin);
 
     var defaultCurrency = 'https://w3id.org/cc#bit';
 
