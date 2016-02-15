@@ -4,6 +4,7 @@
 var Sequelize = require('sequelize');
 var express   = require('express');
 var program   = require('commander');
+var wc        = require('../lib/webcredits');
 
 var app = express();
 
@@ -208,7 +209,57 @@ function startServer(sequelize, config, port) {
 
   app.get('/insert', function (req, res) {
 
-    res.send('insert');
+    var defaultCurrency = 'https://w3id.org/cc#bit';
+
+    var source      = req.query.source;
+    var destination = req.query.destination;
+    var currency    = req.query.currency || defaultCurrency;
+    var amount      = req.query.amount;
+    var created     = null;
+    var description = req.query.description;
+
+
+    if (!source) {
+      res.send('source required');
+      return;
+    }
+
+    if (!destination) {
+      res.send('destination required');
+      return;
+    }
+
+    if (!currency) {
+      res.send('currency required');
+      return;
+    }
+
+    if (!amount) {
+      res.send('amount required');
+      return;
+    }
+
+    var credit = {};
+
+    credit["https://w3id.org/cc#source"] = source;
+    credit["https://w3id.org/cc#amount"] = amount;
+    credit["https://w3id.org/cc#currency"] = currency;
+    credit["https://w3id.org/cc#destination"] = destination;
+
+    credit["http://purl.org/dc/terms/description"] = description || null;
+    credit["http://purl.org/dc/terms/created"] = created || null;
+
+
+    wc.insert(credit, sequelize, config, function(err, ret) {
+      if (err) {
+        res.send(err);
+        return;
+      } else {
+        res.send(ret);
+      }
+
+    });
+
 
   });
 
@@ -243,11 +294,20 @@ function server(config, port) {
 */
 function bin(argv) {
   // setup config
-  var config = require('./dbconfig.js');
+  var config = wc.getConfig();
+  console.log(config);
 
   program
   .option('-p, --port <n>', 'Port', parseInt)
+  .option('-d, --database <database>', 'Database')
+  .option('-w, --wallet <wallet>', 'Wallet')
   .parse(argv);
+
+  var defaultDatabase = 'webcredits';
+  var defaultWallet   = 'https://localhost/wallet/test#this';
+
+  config.database = program.database || config.database || defaultDatabase;
+  config.wallet   = program.wallet   || config.wallet   || defaultWallet;
 
   var port = program.port;
 
