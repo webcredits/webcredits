@@ -183,6 +183,13 @@ function startServer(sequelize, config, port) {
 
   app.get('/balance', function (req, res) {
 
+    var origin = req.headers.origin;
+    if (origin) {
+      res.setHeader('Access-Control-Allow-Origin', origin);      
+    }
+
+    var defaultCurrency = 'https://w3id.org/cc#bit';
+
     var source   = req.query.source;
 
     if (!source) {
@@ -205,11 +212,31 @@ function startServer(sequelize, config, port) {
         //console.log('balance for ' + source + ' : ' + bal[0][0].amount);
         //var amount = Math.round(  bal[0][0].amount * 10) / 10.0;
         var turtle = '';
-        res.setHeader('Content-Type', 'text/turtle');
+        var jsonld = {};
+
+        var contentType = 'application/ld+json';
+
+        res.setHeader('Content-Type', contentType);
         for (var i = 0; i < bal[0].length; i++) {
           turtle += '<' + bal[0][i].source + '> <https://w3id.org/cc#amount> ' + bal[0][i].amount + ' .\n';
         }
-        res.send(turtle);
+
+
+        for (i = 0; i < bal[0].length; i++) {
+          jsonld["https://w3id.org/cc#source"] = source;
+          jsonld["https://w3id.org/cc#amount"] = bal[0][i].amount;
+          jsonld["https://w3id.org/cc#currency"] = defaultCurrency;
+        }
+
+
+        if (contentType === 'application/ld+json') {
+          res.send(jsonld);
+        }
+
+        if (contentType === 'text/turtle') {
+          res.send(turtle);
+        }
+
       }
     });
 
