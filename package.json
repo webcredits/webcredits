@@ -1,6 +1,6 @@
 {
   "name": "webcredits",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "description": "webcredits",
   "main": "lib/webcredits.js",
   "scripts": {

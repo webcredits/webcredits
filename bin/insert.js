@@ -56,7 +56,14 @@ function bin(argv) {
     config.wallet   = program.wallet   || config.wallet   || defaultWallet;
 
     var sequelize = webcredits.setupDB(config);
-    webcredits.insert(credit, sequelize, config);
+    webcredits.insert(credit, sequelize, config, function(err, ret) {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(ret);
+      }
+      sequelize.close();
+    });
 
   })
   .parse(argv);

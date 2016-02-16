@@ -30,7 +30,15 @@ function bin(argv) {
   config.database = program.database || config.database || defaultDatabase;
   config.wallet   = program.wallet   || config.wallet   || defaultWallet;
 
-  webcredits.balance(source, config);
+  var sequelize = webcredits.setupDB(config);
+  webcredits.getBalance(source, sequelize, config, function(err, ret){
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(ret);
+    }
+    sequelize.close();
+  });
 
 }
 
