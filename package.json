@@ -1,6 +1,6 @@
 {
   "name": "webcredits",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "description": "webcredits",
   "main": "lib/webcredits.js",
   "scripts": {
@@ -19,6 +19,7 @@
   "author": "Melvin Carvalho <melvincarvalho@gmail.com> (http://melvincarvalho.com/#me)",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.15.0",
     "commander": "^2.9.0",
     "crypto": "0.0.3",
     "debug": "^2.2.0",

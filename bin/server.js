@@ -4,6 +4,8 @@
 var Sequelize = require('sequelize');
 var express   = require('express');
 var program   = require('commander');
+var bodyParser = require('body-parser');
+
 var wc        = require('../lib/webcredits');
 
 var app = express();
@@ -51,6 +53,12 @@ function setupDB(config) {
 * @param  {Object} sequelize db object
 */
 function startServer(sequelize, config, port) {
+
+  app.use( bodyParser.json() );       // to support JSON-encoded bodies
+  app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: true
+  }));
+
 
   app.get('/', function (req, res) {
     var ret = '';
@@ -208,16 +216,19 @@ function startServer(sequelize, config, port) {
 
   });
 
-  app.get('/insert', function (req, res) {
+  app.post('/insert', function (req, res) {
+
+    var origin = req.headers.origin;
+    res.setHeader('Access-Control-Allow-Origin', origin);
 
     var defaultCurrency = 'https://w3id.org/cc#bit';
 
-    var source      = req.query.source;
-    var destination = req.query.destination;
-    var currency    = req.query.currency || defaultCurrency;
-    var amount      = req.query.amount;
+    var source      = req.body.source;
+    var destination = req.body.destination;
+    var currency    = req.body.currency || defaultCurrency;
+    var amount      = req.body.amount;
     var created     = null;
-    var description = req.query.description;
+    var description = req.body.description;
 
 
     if (!source) {
@@ -264,20 +275,21 @@ function startServer(sequelize, config, port) {
 
   });
 
-  app.get('/inbox', function (req, res) {
+  app.post('/inbox/', function (req, res) {
 
     var origin = req.headers.origin;
     res.setHeader('Access-Control-Allow-Origin', origin);
 
     var defaultCurrency = 'https://w3id.org/cc#bit';
 
-    var source      = req.query.source;
-    var destination = req.query.destination;
-    var currency    = req.query.currency || defaultCurrency;
-    var amount      = req.query.amount;
+    var source      = req.body.source;
+    var destination = req.body.destination;
+    var currency    = req.body.currency || defaultCurrency;
+    var amount      = req.body.amount;
     var created     = null;
-    var description = req.query.description;
+    var description = req.body.description;
 
+    console.log(req.body);
 
     if (!source) {
       res.send('source required');
@@ -325,6 +337,8 @@ function startServer(sequelize, config, port) {
 
   var defaultPort = 11077;
   port = port || defaultPort;
+
+
 
   var server = app.listen(port, function () {
     var host = server.address().address;
