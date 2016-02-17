@@ -185,7 +185,7 @@ function startServer(sequelize, config, port) {
 
     var origin = req.headers.origin;
     if (origin) {
-      res.setHeader('Access-Control-Allow-Origin', origin);      
+      res.setHeader('Access-Control-Allow-Origin', origin);
     }
 
     var defaultCurrency = 'https://w3id.org/cc#bit';
@@ -302,8 +302,7 @@ function startServer(sequelize, config, port) {
 
   });
 
-  app.post('/inbox/', function (req, res) {
-
+  function insert (req,res) {
     var origin = req.headers.origin;
     res.setHeader('Access-Control-Allow-Origin', origin);
 
@@ -359,8 +358,10 @@ function startServer(sequelize, config, port) {
 
     });
 
+  }
 
-  });
+  app.post('/inbox/', insert);
+  app.post('/mark', insert);
 
   var defaultPort = 11077;
   port = port || defaultPort;
