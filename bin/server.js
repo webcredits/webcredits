@@ -265,10 +265,11 @@ function startServer(sequelize, config, port) {
 
     wc.today(source, sequelize, config, function(err, ret) {
       if (err) {
-        res.send(err);
+        res.sendStatus(err);
         return;
       } else {
-        res.send(ret);
+        console.log('today is ' + ret);
+        res.sendStatus(ret);
       }
 
     });
