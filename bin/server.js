@@ -270,6 +270,7 @@ function startServer(sequelize, config, port) {
       } else {
         console.log('today is ' + ret);
         res.sendStatus(ret);
+        return;
       }
 
     });
