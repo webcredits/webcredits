@@ -263,17 +263,56 @@ function startServer(sequelize, config, port) {
       config.wallet = null;
     }
 
-    wc.today(source, sequelize, config, function(err, ret) {
-      if (err) {
-        res.sendStatus(err);
-        return;
-      } else {
-        console.log('today is ' + ret);
-        res.sendStatus(ret);
-        return;
-      }
+    var balanceSql = 'Select sum(amount) amount from Credit where destination = :source and DATE(timestamp) = CURDATE() and wallet = :wallet ;';
 
+    sequelize.query(balanceSql,  { replacements: { wallet: config.wallet, source: source } }).then(function(bal) {
+      return bal;
+    }).catch(function(err){
+      console.log('Balance Failed.', err);
+    }).then(function(bal) {
+      if (bal[0][0]) {
+        //console.log('balance for ' + source + ' : ' + bal[0][0].amount);
+        //var amount = Math.round(  bal[0][0].amount * 10) / 10.0;
+        var turtle = '';
+        var jsonld = {};
+        var text   = '';
+
+        //var contentType = 'application/ld+json';
+        var contentType = 'text/plain';
+
+        res.setHeader('Content-Type', contentType);
+        for (var i = 0; i < bal[0].length; i++) {
+          turtle += '<' + bal[0][i].source + '> <https://w3id.org/cc#amount> ' + bal[0][i].amount + ' .\n';
+        }
+
+
+
+        for (i = 0; i < bal[0].length; i++) {
+          //jsonld["https://w3id.org/cc#source"] = source;
+          jsonld["https://w3id.org/cc#amount"] = bal[0][i].amount;
+          //jsonld["https://w3id.org/cc#currency"] = defaultCurrency;
+          text = bal[0][i].amount;
+          
+        }
+
+
+
+        if (contentType === 'application/ld+json') {
+          res.send(jsonld);
+        }
+
+        if (contentType === 'text/turtle') {
+          res.send(turtle);
+        }
+
+        if (contentType === 'text/plain') {
+          res.sendStatus(text);
+        }
+
+      }
     });
+
+
 
 
   });
@@ -372,6 +411,7 @@ function startServer(sequelize, config, port) {
       return;
     }
 
+
     var credit = {};
 
     credit["https://w3id.org/cc#source"] = source;
@@ -432,7 +472,6 @@ function server(config, port) {
 function bin(argv) {
   // setup config
   var config = wc.getConfig();
-  console.log(config);
 
   program
   .option('-p, --port <n>', 'Port', parseInt)
@@ -446,6 +485,7 @@ function bin(argv) {
   config.database = program.database || config.database || defaultDatabase;
   config.wallet   = program.wallet   || config.wallet   || defaultWallet;
 
+  console.log(config);
   var port = program.port;
 
   server(config, port);
@@ -456,4 +496,3 @@ if (require.main === module) {
   bin(process.argv);
 }
 
-module.exports = bin;
