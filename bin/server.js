@@ -243,6 +243,39 @@ function startServer(sequelize, config, port) {
 
   });
 
+  app.get('/today', function (req, res) {
+
+    var origin = req.headers.origin;
+    if (origin) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+
+    var defaultCurrency = 'https://w3id.org/cc#bit';
+
+    var source   = req.query.source;
+
+    if (!source) {
+      res.send('source required');
+      return;
+    }
+
+    if (!config.wallet) {
+      config.wallet = null;
+    }
+
+    wc.today(source, sequelize, config, function(err, ret) {
+      if (err) {
+        res.send(err);
+        return;
+      } else {
+        res.send(ret);
+      }
+
+    });
+
+
+  });
+
   app.post('/insert', function (req, res) {
 
     var origin = req.headers.origin;
