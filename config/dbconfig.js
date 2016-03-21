@@ -8,5 +8,6 @@ config.database = 'webcredits';
 config.username = 'root';
 config.password = '';
 config.wallet   = 'https://localhost/wallet/test#this';
+config.currency = 'https://w3id.org/cc#bit';
 
 module.exports = config;
