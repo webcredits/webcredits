@@ -13,8 +13,10 @@ function help(argv, callback) {
   ret += '  help                         - shows help message\n';
   ret += '  insert <source> <amount> <unit> <destination> \n';
   ret += '     [description] [timestamp] - inserts a web credit\n';
+  ret += '  mark                         - alias for insert\n';
   ret += '  reputation <URI>             - gets the reputation\n';
   ret += '  server [-p <port>]           - starts an express server on port p\n';
+  ret += '  today <URI>                  - shows credits today\n';
   ret += '  websocket                    - starts a websocket server\n';
   callback(null, ret);
 }

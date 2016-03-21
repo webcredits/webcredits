@@ -6,7 +6,7 @@ var program    = require('commander');
 
 
 /**
-* version as a command
+* bin as a command
 */
 function bin(argv) {
   // setup config
@@ -16,6 +16,7 @@ function bin(argv) {
 
   program
   .arguments('<source> <amount> <currency> <destination> [description] [timestamp]')
+  .option('-c, --currency <currency>', 'Currency')
   .option('-d, --database <database>', 'Database')
   .option('-w, --wallet <wallet>', 'Wallet')
   .action(function(source, amount, currency, destination, description, timestamp, options){
@@ -26,6 +27,14 @@ function bin(argv) {
     credit["https://w3id.org/cc#destination"]      = destination;
     credit["http://purl.org/dc/terms/description"] = description;
     credit["https://w3id.org/cc#timestamp"]        = timestamp;
+
+    var defaultCurrency = 'https://w3id.org/cc#bit';
+    var defaultDatabase = 'webcredits';
+    var defaultWallet   = 'https://localhost/wallet/test#this';
+
+    config.currency = program.currency || config.currency || defaultCurrency;
+    config.database = program.database || config.database || defaultDatabase;
+    config.wallet   = program.wallet   || config.wallet   || defaultWallet;
 
 
     // clean and validate
@@ -40,7 +49,7 @@ function bin(argv) {
     }
 
     if (!credit["https://w3id.org/cc#currency"]) {
-      credit["https://w3id.org/cc#currency"] = 'https://w3id.org/cc#bit';
+      credit["https://w3id.org/cc#currency"] = config.currency;
     }
 
     if (!credit["https://w3id.org/cc#destination"]) {
@@ -48,12 +57,6 @@ function bin(argv) {
       process.exit(-1);
     }
 
-
-    var defaultDatabase = 'webcredits';
-    var defaultWallet   = 'https://localhost/wallet/test#this';
-
-    config.database = program.database || config.database || defaultDatabase;
-    config.wallet   = program.wallet   || config.wallet   || defaultWallet;
 
     var sequelize = webcredits.setupDB(config);
     webcredits.insert(credit, sequelize, config, function(err, ret) {
@@ -67,8 +70,6 @@ function bin(argv) {
 
   })
   .parse(argv);
-
-
 
 }
 

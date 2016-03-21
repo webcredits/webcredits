@@ -13,13 +13,16 @@ function bin(argv) {
   var config = require('./dbconfig.js');
 
   program
+  .option('-c, --currency <currency>', 'Currency')
   .option('-d, --database <database>', 'Database')
   .option('-w, --wallet <wallet>', 'Wallet')
   .parse(argv);
 
+  var defaultCurrency = 'https://w3id.org/cc#bit';
   var defaultDatabase = 'webcredits';
   var defaultWallet   = 'https://localhost/wallet/test#this';
 
+  config.currency = program.currency || config.currency || defaultCurrency;
   config.database = program.database || config.database || defaultDatabase;
   config.wallet   = program.wallet   || config.wallet   || defaultWallet;
 
