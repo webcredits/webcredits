@@ -188,7 +188,7 @@ function startServer(sequelize, config, port) {
       res.setHeader('Access-Control-Allow-Origin', origin);
     }
 
-    var defaultCurrency = 'https://w3id.org/cc#bit';
+    var defaultCurrency = config.currency || 'https://w3id.org/cc#bit';
 
     var source   = req.query.source;
 
@@ -250,7 +250,7 @@ function startServer(sequelize, config, port) {
       res.setHeader('Access-Control-Allow-Origin', origin);
     }
 
-    var defaultCurrency = 'https://w3id.org/cc#bit';
+    var defaultCurrency = config.currency || 'https://w3id.org/cc#bit';
 
     var source   = req.query.source;
 
@@ -292,7 +292,7 @@ function startServer(sequelize, config, port) {
           jsonld["https://w3id.org/cc#amount"] = bal[0][i].amount;
           //jsonld["https://w3id.org/cc#currency"] = defaultCurrency;
           text = bal[0][i].amount;
-          
+
         }
 
 
@@ -322,7 +322,7 @@ function startServer(sequelize, config, port) {
     var origin = req.headers.origin;
     res.setHeader('Access-Control-Allow-Origin', origin);
 
-    var defaultCurrency = 'https://w3id.org/cc#bit';
+    var defaultCurrency = config.currency || 'https://w3id.org/cc#bit';
 
     var source      = req.body.source;
     var destination = req.body.destination;
@@ -380,7 +380,7 @@ function startServer(sequelize, config, port) {
     var origin = req.headers.origin;
     res.setHeader('Access-Control-Allow-Origin', origin);
 
-    var defaultCurrency = 'https://w3id.org/cc#bit';
+    var defaultCurrency = config.currency || 'https://w3id.org/cc#bit';
 
     var source      = req.body.source;
     var destination = req.body.destination;
@@ -474,14 +474,17 @@ function bin(argv) {
   var config = wc.getConfig();
 
   program
+  .option('-c, --currency <currency>', 'Currency')
   .option('-p, --port <n>', 'Port', parseInt)
   .option('-d, --database <database>', 'Database')
   .option('-w, --wallet <wallet>', 'Wallet')
   .parse(argv);
 
+  var defaultCurrency = 'https://w3id.org/cc#bit';
   var defaultDatabase = 'webcredits';
   var defaultWallet   = 'https://localhost/wallet/test#this';
 
+  config.currency = program.currency || config.currency || defaultCurrency;
   config.database = program.database || config.database || defaultDatabase;
   config.wallet   = program.wallet   || config.wallet   || defaultWallet;
 
@@ -495,4 +498,3 @@ function bin(argv) {
 if (require.main === module) {
   bin(process.argv);
 }
-
