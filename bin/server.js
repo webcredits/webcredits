@@ -245,6 +245,7 @@ function startServer(sequelize, config, port) {
 
   app.get('/today', function (req, res) {
 
+
     var origin = req.headers.origin;
     if (origin) {
       res.setHeader('Access-Control-Allow-Origin', origin);
@@ -275,10 +276,8 @@ function startServer(sequelize, config, port) {
         //var amount = Math.round(  bal[0][0].amount * 10) / 10.0;
         var turtle = '';
         var jsonld = {};
-        var text   = '';
 
-        //var contentType = 'application/ld+json';
-        var contentType = 'text/plain';
+        var contentType = 'application/ld+json';
 
         res.setHeader('Content-Type', contentType);
         for (var i = 0; i < bal[0].length; i++) {
@@ -286,15 +285,11 @@ function startServer(sequelize, config, port) {
         }
 
 
-
         for (i = 0; i < bal[0].length; i++) {
-          //jsonld["https://w3id.org/cc#source"] = source;
+          jsonld["https://w3id.org/cc#source"] = source;
           jsonld["https://w3id.org/cc#amount"] = bal[0][i].amount;
-          //jsonld["https://w3id.org/cc#currency"] = defaultCurrency;
-          text = bal[0][i].amount;
-
+          jsonld["https://w3id.org/cc#currency"] = defaultCurrency;
         }
-
 
 
         if (contentType === 'application/ld+json') {
@@ -305,13 +300,8 @@ function startServer(sequelize, config, port) {
           res.send(turtle);
         }
 
-        if (contentType === 'text/plain') {
-          res.sendStatus(text);
-        }
-
       }
     });
-
 
 
 
