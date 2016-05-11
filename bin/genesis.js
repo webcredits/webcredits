@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // requires
-var wc      = require('../lib/webcredits.js');
+var wc      = require('../');
 var program = require('commander');
 var config  = require('../config/dbconfig.js');
 
@@ -26,12 +26,14 @@ function bin(argv) {
   config.database = program.database || config.database || defaultDatabase;
   config.wallet   = program.wallet   || config.wallet   || defaultWallet;
 
-  wc.genesis(config, function(err, ret) {
+  var sequelize = webcredits.setupDB(config);
+  wc.genesis(sequelize, config, function(err, ret) {
     if (err) {
       console.error(err);
     } else {
       console.log(ret);
     }
+    sequelize.close();
   });
 
 }

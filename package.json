@@ -1,6 +1,6 @@
 {
   "name": "webcredits",
-  "version": "0.0.60",
+  "version": "0.0.62",
   "description": "webcredits",
   "main": "index.js",
   "scripts": {
