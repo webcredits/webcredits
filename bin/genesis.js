@@ -26,7 +26,7 @@ function bin(argv) {
   config.database = program.database || config.database || defaultDatabase;
   config.wallet   = program.wallet   || config.wallet   || defaultWallet;
 
-  var sequelize = webcredits.setupDB(config);
+  var sequelize = wc.setupDB(config);
   wc.genesis(sequelize, config, function(err, ret) {
     if (err) {
       console.error(err);
