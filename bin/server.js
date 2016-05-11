@@ -5,9 +5,6 @@ var program    = require('commander')
 var wc         = require('../')
 var express    = require('express')
 
-/**
-* version as a command
-*/
 function bin(argv) {
 
   program
@@ -20,9 +17,6 @@ function bin(argv) {
   .parse(argv)
 
   var app
-
-
-
   try {
     app = wc.createServer(program)
   } catch (e) {
