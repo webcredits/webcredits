@@ -3,6 +3,7 @@
 // requires
 var wc      = require('../lib/webcredits.js');
 var program = require('commander');
+var config  = require('../config/dbconfig.js');
 
 
 /**
@@ -10,7 +11,6 @@ var program = require('commander');
  */
 function bin(argv) {
   // setup config
-  var config = require('./dbconfig.js');
 
   program
   .option('-c, --currency <currency>', 'Currency')
