@@ -25,7 +25,7 @@ function bin(argv) {
     credit["https://w3id.org/cc#amount"]           = amount;
     credit["https://w3id.org/cc#currency"]         = currency;
     credit["https://w3id.org/cc#destination"]      = destination;
-    credit["http://purl.org/dc/terms/description"] = description;
+    credit["https://w3id.org/cc#description"]      = description;
     credit["https://w3id.org/cc#timestamp"]        = timestamp;
 
     var defaultCurrency = 'https://w3id.org/cc#bit';
