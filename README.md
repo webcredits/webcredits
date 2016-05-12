@@ -10,12 +10,24 @@ web.
 
     npm install -g webcredits
 
-# Setup
+Or install via github clone
 
-    credit create
-    credit genesis
+# Config
+
+While web credits will often work out of the box, in the config directory to change settings.  See below.
+
+# Pre requisites
+
+Webcredits requires a database.  While sqlite can be used via the config, it is recommended to use a mysql database, the defualt user is set to 'me'
+
+# Example Setup
+
+    credit create  # will create the tables in the DB
+    credit genesis # will seed the ledger with 1 million bits in the coinbase
 
 After the tables are in place, the genesis process must be carried out.  The standard population script will put 1 million bits in the coinbase which can then be distributed in tranches to the seed users or robots.
+
+# Interacting with Webcredits -- HTTP
 
     credit server
 
@@ -27,6 +39,9 @@ Then go to
 * <http://localhost:11077/reputation>
 * <http://localhost:11077/tx>
 * <http://localhost:11077/insert>
+
+# Interacting with Webcredits -- command line
+
 
 Alternatively calls can be placed via the library or command line.
 
@@ -84,7 +99,7 @@ A wallet consists of a ledger and transactions.  Each entry in the ledger is a U
 
 Changes are made to the ledger via webcredits.  
 
-    <source> <amount> <currency> <destination> <comment> <timestamp>
+    <source> <amount> <currency> <destination> [comment] [context] [timestamp]
 
 The genesis state is a starting ledger where one balance, usually the "coinbase" is a non zero account with an emission algorithm.  Digital signatures may be included with the webcredits to prove who sent them.
 
