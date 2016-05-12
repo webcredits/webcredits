@@ -29,7 +29,17 @@ After the tables are in place, the genesis process must be carried out.  The sta
 
 # Interacting with Webcredits -- HTTP
 
-    credit server
+    credit server --key <key> --cert <cert>
+
+##### How do I get the --key and the --cert?
+
+You need an SSL certificate you get this from your domain provider or for free from [Let's Encrypt!](https://letsencrypt.org/getting-started/).
+
+If you don't have one yet, or you just want to test `webcredits`, generate a certificate:
+```
+$ openssl genrsa 2048 > ../localhost.key
+$ openssl req -new -x509 -nodes -sha256 -days 3650 -key ../localhost.key -subj '/CN=*.localhost' > ../localhost.cert
+```
 
 Then go to
 
