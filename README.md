@@ -34,14 +34,37 @@ After the tables are in place, the genesis process must be carried out.  The sta
 Then go to
 
 * <http://localhost:11077/>
+
+Provides a list of ledgers
+
 * <http://localhost:11077/ledger>
+
+Shows values in a ledger
+
 * <http://localhost:11077/balance>
+
+Requires a source variable and gives an individual balance
+
 * <http://localhost:11077/reputation>
+
+Requires a source variable and gives a reputation score
+
+* <http://localhost:11077/today>
+
+Requires a source variable and gives the credits for a given day
+
 * <http://localhost:11077/tx>
+
+Requires a source variable and gives a reputation score for that user
+
 * <http://localhost:11077/insert>
 
-# Interacting with Webcredits -- command line
+Inserts via POST, required are source, destination and amount
 
+The source is authenticated via WebID TLS
+
+
+# Interacting with Webcredits -- command line
 
 Alternatively calls can be placed via the library or command line.
 
