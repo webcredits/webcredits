@@ -43,31 +43,31 @@ $ openssl req -new -x509 -nodes -sha256 -days 3650 -key ../localhost.key -subj '
 
 Then go to
 
-* <http://localhost:11077/>
+* <https://localhost:11077/>
 
 Provides a list of ledgers
 
-* <http://localhost:11077/ledger>
+* <https://localhost:11077/ledger>
 
 Shows values in a ledger
 
-* <http://localhost:11077/balance>
+* <https://localhost:11077/balance>
 
 Requires a source variable and gives an individual balance
 
-* <http://localhost:11077/reputation>
+* <https://localhost:11077/reputation>
 
 Requires a source variable and gives a reputation score
 
-* <http://localhost:11077/today>
+* <https://localhost:11077/today>
 
 Requires a source variable and gives the credits for a given day
 
-* <http://localhost:11077/tx>
+* <https://localhost:11077/tx>
 
 Requires a source variable and gives a reputation score for that user
 
-* <http://localhost:11077/insert>
+* <https://localhost:11077/insert>
 
 Inserts via POST, required are source, destination and amount
 
