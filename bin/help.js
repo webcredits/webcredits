@@ -12,7 +12,8 @@ function help(argv, callback) {
   ret += '  genesis                      - seeds a wallet\n';
   ret += '  help                         - shows help message\n';
   ret += '  insert <source> <amount> <unit> <destination> \n';
-  ret += '     [description] [timestamp] - inserts a web credit\n';
+  ret += '     [description] [context] \n';
+  ret += '     [timestamp]               - inserts a web credit\n';
   ret += '  mark                         - alias for insert\n';
   ret += '  reputation <URI>             - gets the reputation\n';
   ret += '  server [-p <port>]           - starts an express server on port p\n';

@@ -15,18 +15,19 @@ function bin(argv) {
   var credit = {};
 
   program
-  .arguments('<source> <amount> <currency> <destination> [description] [timestamp]')
+  .arguments('<source> <amount> <currency> <destination> [description] [context] [timestamp]')
   .option('-c, --currency <currency>', 'Currency')
   .option('-d, --database <database>', 'Database')
   .option('-w, --wallet <wallet>', 'Wallet')
   .action(function(source, amount, currency, destination, description, timestamp, options){
-    credit["@type"]                                = 'https://w3id.org/cc#Credit';
-    credit["https://w3id.org/cc#source"]           = source;
-    credit["https://w3id.org/cc#amount"]           = amount;
-    credit["https://w3id.org/cc#currency"]         = currency;
-    credit["https://w3id.org/cc#destination"]      = destination;
-    credit["https://w3id.org/cc#description"]      = description;
-    credit["https://w3id.org/cc#timestamp"]        = timestamp;
+    credit["@type"]                           = 'https://w3id.org/cc#Credit';
+    credit["https://w3id.org/cc#source"]      = source;
+    credit["https://w3id.org/cc#amount"]      = amount;
+    credit["https://w3id.org/cc#currency"]    = currency;
+    credit["https://w3id.org/cc#destination"] = destination;
+    credit["https://w3id.org/cc#description"] = description;
+    credit["https://w3id.org/cc#timestamp"]   = timestamp;
+    credit["https://w3id.org/cc#context"]     = context;
 
     var defaultCurrency = 'https://w3id.org/cc#bit';
     var defaultDatabase = 'webcredits';
