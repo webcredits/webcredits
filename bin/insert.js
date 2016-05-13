@@ -19,7 +19,7 @@ function bin(argv) {
   .option('-c, --currency <currency>', 'Currency')
   .option('-d, --database <database>', 'Database')
   .option('-w, --wallet <wallet>', 'Wallet')
-  .action(function(source, amount, currency, destination, description, timestamp, options){
+  .action(function(source, amount, currency, destination, description, context, timestamp, options){
     credit["@type"]                           = 'https://w3id.org/cc#Credit';
     credit["https://w3id.org/cc#source"]      = source;
     credit["https://w3id.org/cc#amount"]      = amount;
