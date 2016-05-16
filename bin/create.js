@@ -10,7 +10,7 @@ var program    = require('commander');
  */
 function bin(argv) {
   // setup config
-  var config = require('./dbconfig.js');
+  var config = require('../lib/dbconfig.js');
 
   program
   .option('-c, --currency <currency>', 'Currency')
