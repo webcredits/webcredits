@@ -246,6 +246,8 @@ The first client used is an open source client side JS project called virtual wa
 
 # API
 
+http://webcredits.github.io/webcredits/doc/global.html
+
 ## Functions
 
 <dl>
