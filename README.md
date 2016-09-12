@@ -1,9 +1,10 @@
+[![NPM Version](https://img.shields.io/npm/v/webcredits.svg?style=flat-square)](https://npm.im/webcredits)
 [![Stories in Ready](https://badge.waffle.io/webcredits/webcredits.png?label=ready&title=Ready)](https://waffle.io/webcredits/webcredits)
 
 webcredits
 ==========
 
-Webcredits is a library for creating decentralized ledgers and payments on the
+> Webcredits is a library for creating decentralized ledgers and payments on the
 web.
 
 # Installation
