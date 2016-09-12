@@ -1,3 +1,5 @@
+![Webcredits Logo](https://raw.githubusercontent.com/webcredits/webcredits/master/static/image/webcredits.png)
+
 [![NPM Version](https://img.shields.io/npm/v/webcredits.svg?style=flat-square)](https://npm.im/webcredits)
 [![Stories in Ready](https://badge.waffle.io/webcredits/webcredits.png?label=ready&title=Ready)](https://waffle.io/webcredits/webcredits)
 
@@ -7,28 +9,28 @@ webcredits
 > Webcredits is a library for creating decentralized ledgers and payments on the
 web.
 
-# Installation
+## Installation
 
     npm install -g webcredits
 
 Or install via github clone
 
-# Config
+## Config
 
 While web credits will often work out of the box, in the config directory to change settings.  See below.
 
-# Pre requisites
+## Pre requisites
 
 Webcredits requires a database.  While sqlite can be used via the config, it is recommended to use a mysql database, the defualt user is set to 'me'
 
-# Example Setup
+## Example Setup
 
     credit create  # will create the tables in the DB
     credit genesis # will seed the ledger with 1 million bits in the coinbase
 
 After the tables are in place, the genesis process must be carried out.  The standard population script will put 1 million bits in the coinbase which can then be distributed in tranches to the seed users or robots.
 
-# Interacting with Webcredits -- HTTP
+## Interacting with Webcredits -- HTTP
 
     credit server --key <key> --cert <cert>
 
@@ -75,11 +77,11 @@ Inserts via POST, required are source, destination and amount
 The source is authenticated via WebID TLS
 
 
-# Interacting with Webcredits -- command line
+## Interacting with Webcredits -- command line
 
 Alternatively calls can be placed via the library or command line.
 
-# Commands
+## Commands
 
     balance <URI>                - shows a balance
     create                       - creates a database
@@ -94,7 +96,7 @@ Alternatively calls can be placed via the library or command line.
 
 Will conform to the values in lib/dbconfig.js
 
-# Configuration
+## Configuration
 
     config.dialect  = 'mysql';
     config.storage  = 'credit.db';
@@ -121,11 +123,11 @@ Will conform to the values in lib/dbconfig.js
 
 Are supported
 
-# More Detailed Explanation
+## More Detailed Explanation
 
 Webcredits is a transferable points scoring system.  It can be used to provide feedback to the user, throttle actions and allow "gamification" of apps.  The system is secure and compatible with the work of the W3C payments groups, so that real incentives may be eventually used.  The first versions of the system will only use test credits of negligible monetary value.  However, the same code can be used for production systems using full payments.
 
-# Technical Overview
+## Technical Overview
 
 A wallet consists of a ledger and transactions.  Each entry in the ledger is a URI and a positive balance.  
 
@@ -139,15 +141,15 @@ The genesis state is a starting ledger where one balance, usually the "coinbase"
 
 The ledgers and credits can be stored in an LDPC or database.  Changes to the ledger are made by adding new transactions, either via HTTP POST or by a direct insert to the database.
 
-# Model
+## Model
 
-## Ontology
+### Ontology
 
 The main ontology is the webcredits system
 
 * https://w3id.org/cc
 
-## Discovery
+### Discovery
 
 Wallets can be found either from a WebID or from an application configuration using the wallet predicate.  
 
@@ -155,7 +157,7 @@ Wallets can be found either from a WebID or from an application configuration us
 
 This allows users to launch a wallet app and see their balance, their transaction history, and to make new payments.
 
-## Wallet
+### Wallet
 
 The wallet is the main holding structure that points to all the other items.  A typical wallet may look as follows:
 
@@ -173,7 +175,7 @@ The wallet is the main holding structure that points to all the other items.  A 
 * The inbox is where you can POST new credits
 * The tx is where processed transactions are (optionally) stored
 
-## Databases
+### Databases
 
 For large scale processing a database can be used.  Initially supported databases are:
 
@@ -212,20 +214,20 @@ CREATE TABLE Genesis (
 ```
 The default currency is the 'bit' equal to one millionth of a bitcoin.
 
-# Controller
+## Controller
 
-## Reading
+### Reading
 
 It is possible to access balances and credits directly from the database.
 
 A RESTful API is also provided for convenience to the database.
 
-## Writing
+### Writing
 
 It is possible to write records to the database, tho this is not recommended.  Better is to use the javascript API.
 
 
-## JavaScript API
+### JavaScript API
 
 The javascript API provides a function insert.js that will
 * insert a credit into the data store
@@ -237,19 +239,19 @@ The javascript API provides a function insert.js that will
     insert.js <source> <amount> <currency> <destination> [comment] [timestamp] [wallet]
 ```
 
-# Views
+## Views
 
-## Virtual Wallet
+### Virtual Wallet
 
 The first client used is an open source client side JS project called virtual wallet:
 
 * https://virtualwallet.org/
 
-# API
+## API
 
 http://webcredits.github.io/webcredits/doc/global.html
 
-## Functions
+### Functions
 
 <dl>
 <dt><a href="#setupDB">setupDB(dialect, storage)</a> ⇒ <code>Object</code></dt>
