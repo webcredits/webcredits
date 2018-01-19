@@ -17,7 +17,7 @@ Or install via github clone
 
 ## Config
 
-While web credits will often work out of the box, in the config directory to change settings.  See below.
+While web credits will often work out of the box, in the config directory look to change settings.  See below.
 
 ## Pre requisites
 
